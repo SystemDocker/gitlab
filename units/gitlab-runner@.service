@@ -1,0 +1,9 @@
+[Unit]
+Description=GitLab Runner %I
+
+[Service]
+# SystemDocker configuration
+Environment='DOCKER_IMAGE=gitlab/gitlab-runner:alpine'
+
+# Setup the volume
+Environment='DOCKER_VOLUME_ETC_GITLAB_RUNNER=/srv/docker/gitlab/instance/%i/runner:/etc/gitlab-runner'
