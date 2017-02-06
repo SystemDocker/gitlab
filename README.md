@@ -31,12 +31,11 @@ GitLab also requires a database and cache to be setup along-side the service for
 
 ```
 cd /etc/systemd/system/gitlab\@.service.d
-ln -s /srv/docker/postgresql/dropins/postgresql-link.conf 10-postgresql-link.conf
-cp /srv/docker/redis/dropins/redis-link.conf 10-redis-link.conf
-sed -i "s/:redis'\$/:redisio'/" 10-redis-link.conf
+sed "s/:postgres'\$/:postgresql'/" /srv/docker/postgres/dropins/postgres-link.conf > 10-redis-link.conf
+sed "s/:redis'\$/:redisio'/" /srv/docker/redis/dropins/redis-link.conf > 10-redis-link.conf
 ```
 
-**NOTE:** Currently the image used for GitLab expects redis to be linked as `redisio` instead of `redis`, this is why `redis-link.conf` is copied and modified. Subscribe to [SystemDocker/gitlab#1](https://github.com/SystemDocker/gitlab/issues/1) for updates on this issue.
+**NOTE:** Currently the image used for GitLab expects postgres to be linked as `postgresql` instead of `postgres` and redis to be linked as `redisio` instead of `redis`, this is why the two sed commands are performed. Subscribe to [SystemDocker/gitlab#1](https://github.com/SystemDocker/gitlab/issues/1) for updates on this issue.
 
 You should ensure that [SystemDocker PostgreSQL](https://github.com/SystemDocker/postgresql) and [SystemDocker Redis](https://github.com/SystemDocker/redis) have been installed before trying to start the `gitlab` service.
 
