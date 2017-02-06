@@ -1,0 +1,9 @@
+[Unit]
+Description=GitLab %I
+
+[Service]
+# SystemDocker configuration
+Environment='DOCKER_IMAGE=sameersbn/gitlab'
+
+# Setup the volume
+Environment='DOCKER_VOLUME_HOME_GIT_DATA=/srv/docker/gitlab/instance/%i/data:/home/git/data'
